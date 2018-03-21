@@ -1,4 +1,4 @@
-package only_gary;
+package only_gary.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +14,8 @@ public class User {
     private String name;
 
     private String email;
+
+    private String username;
 
     public Integer getId() {
         return id;
@@ -39,5 +41,12 @@ public class User {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 }
