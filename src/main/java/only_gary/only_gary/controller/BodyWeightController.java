@@ -4,11 +4,11 @@ import only_gary.model.BodyWeight;
 import only_gary.repository.BodyWeightRepository;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +21,8 @@ import java.util.List;
 @RequestMapping(path="/bodyWeight")
 public class BodyWeightController {
 
-    private static SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     private BodyWeightRepository bodyWeightRepository;
@@ -41,12 +42,11 @@ public class BodyWeightController {
     }
 
     //get from date to date
+    @Transactional
     @GetMapping(path="/get")
     public @ResponseBody List<BodyWeight> getBodyWeightList (@RequestParam Integer userId
             , @RequestParam Timestamp begDate
             , @RequestParam Timestamp endDate){
-
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
         Criteria bodyWeightCriteria = sessionFactory.getCurrentSession().createCriteria(BodyWeight.class);
         bodyWeightCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
