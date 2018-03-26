@@ -1,11 +1,7 @@
 package only_gary.controller;
 
+import only_gary.Service.BodyWeightDaoImpl;
 import only_gary.model.BodyWeight;
-import only_gary.repository.BodyWeightRepository;
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,23 +18,14 @@ import java.util.List;
 public class BodyWeightController {
 
     @Autowired
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    private BodyWeightRepository bodyWeightRepository;
+    private BodyWeightDaoImpl bodyWeightDaoImpl;
 
     @GetMapping(path="/add")
-    public @ResponseBody String addNewBodyWeight (@RequestParam Integer userId
+    public @ResponseBody BodyWeight addNewBodyWeight (@RequestParam Integer userId
             , @RequestParam Timestamp timestamp
             , @RequestParam Double bodyWeight) {
 
-        BodyWeight bodyWeightEntry = new BodyWeight();
-        bodyWeightEntry.setUserId(userId);
-        bodyWeightEntry.setTimestamp(timestamp);
-        bodyWeightEntry.setBodyWeight(bodyWeight);
-
-        bodyWeightRepository.save(bodyWeightEntry);
-        return "Saved bodyWeight";
+        return bodyWeightDaoImpl.addNewBodyWeight(userId, timestamp, bodyWeight);
     }
 
     //get from date to date
@@ -48,12 +35,7 @@ public class BodyWeightController {
             , @RequestParam Timestamp begDate
             , @RequestParam Timestamp endDate){
 
-        Criteria bodyWeightCriteria = sessionFactory.getCurrentSession().createCriteria(BodyWeight.class);
-        bodyWeightCriteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-        bodyWeightCriteria.add(Restrictions.le("timestamp", endDate));
-        bodyWeightCriteria.add(Restrictions.ge("timestamp", begDate));
-
-        return bodyWeightCriteria.list();
+        return bodyWeightDaoImpl.getBodyWeightList(userId, begDate, endDate);
     }
 
 }
