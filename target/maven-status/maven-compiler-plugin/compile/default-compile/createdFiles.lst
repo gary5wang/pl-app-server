@@ -1,0 +1,16 @@
+com/only_gary/controller/BodyWeightController.class
+com/only_gary/model/WorkoutSet.class
+com/only_gary/model/User.class
+com/only_gary/repository/BodyWeightRepository.class
+com/only_gary/Dao/UserDao.class
+com/only_gary/repository/UserRepository.class
+com/only_gary/DaoImpl/BodyWeightDaoImpl.class
+com/only_gary/Config.class
+com/only_gary/Dao/BodyWeightDao.class
+com/only_gary/controller/UserController.class
+com/only_gary/Application.class
+com/only_gary/controller/WorkoutSetController.class
+com/only_gary/DaoImpl/UserDaoImpl.class
+com/only_gary/model/BodyWeight.class
+com/only_gary/model/Exercise.class
+com/only_gary/repository/WorkoutSetRepository.class
