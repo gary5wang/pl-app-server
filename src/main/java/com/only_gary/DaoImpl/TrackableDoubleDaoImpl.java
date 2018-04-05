@@ -36,25 +36,10 @@ public class TrackableDoubleDaoImpl implements TrackableDoubleDao {
         trackableDouble.setTimestamp(timestamp);
         trackableDouble.setEntry(entry);
 
+        trackableMetadata.getTrackableObjectList().add(trackableDouble);
+
         trackableDoubleRepository.save(trackableDouble);
+
         return trackableDouble;
     }
-
-    @Transactional
-    public List<TrackableDouble> getTrackableDoubleListFromTrackableMetadataId (Integer metadataId){
-
-        TrackableMetadata trackableMetadata = trackableMetadataRepository.findById(metadataId);
-
-        if (trackableMetadata == null){
-            //TODO need to log here?
-            return new ArrayList<>();
-        }
-
-        else {
-            return sessionFactory.getCurrentSession().createCriteria(TrackableDouble.class)
-                    .add(Restrictions.eq("trackableMetadata_id", metadataId)).list();
-
-        }
-    }
-
 }

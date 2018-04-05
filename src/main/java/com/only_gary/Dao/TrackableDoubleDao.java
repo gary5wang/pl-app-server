@@ -9,5 +9,4 @@ import java.util.List;
 public interface TrackableDoubleDao {
 
     TrackableDouble addTrackableDouble(TrackableMetadata trackableMetadata, Timestamp timestamp, Double entry);
-    List<TrackableDouble> getTrackableDoubleListFromTrackableMetadataId(Integer metadataId);
 }

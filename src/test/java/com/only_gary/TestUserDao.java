@@ -5,6 +5,7 @@ import com.only_gary.DaoImpl.TrackableMetadataDaoImpl;
 import com.only_gary.DaoImpl.UserDaoImpl;
 import com.only_gary.model.TrackableDouble;
 import com.only_gary.model.TrackableMetadata;
+import com.only_gary.model.TrackableObject;
 import com.only_gary.model.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,8 +76,7 @@ public class TestUserDao {
     public void verifyAddNewTrackableDouble() {
         TrackableDouble trackableDouble = addNewTrackableDouble();
 
-        //TODO find out why this won't work
-        List<TrackableDouble> trackableDoubleList = trackableDoubleDaoImpl.getTrackableDoubleListFromTrackableMetadataId(trackableDouble.getTrackableMetadata().getId());
-        Assert.assertEquals( trackableDouble, trackableDoubleList.get(0));
+        List<TrackableObject> trackableObjectList = trackableMetadataDaoImpl.getTrackableObjectList(trackableDouble.getTrackableMetadata().getId());
+        Assert.assertEquals( trackableDouble, trackableObjectList.get(0));
     }
 }
